@@ -1,0 +1,134 @@
+//
+//  Keys.swift
+//  
+//
+//  Created by abedalkareem omreyh on 22/07/2022.
+//
+
+import Foundation
+
+enum Keys: UInt16 {
+  case zero = 29
+  case one = 18
+  case two = 19
+  case three = 20
+  case four = 21
+  case five = 23
+  case six = 22
+  case seven = 26
+  case eight = 28
+  case nine = 25
+  case a = 0
+  case b = 11
+  case c = 8
+  case d = 2
+  case e = 14
+  case f = 3
+  case g = 5
+  case h = 4
+  case i = 34
+  case j = 38
+  case k = 40
+  case l = 37
+  case m = 46
+  case n = 45
+  case o = 31
+  case p = 35
+  case q = 12
+  case r = 15
+  case s = 1
+  case t = 17
+  case u = 32
+  case v = 9
+  case w = 13
+  case x = 7
+  case y = 16
+  case z = 6
+  case sectionSign = 10
+  case grave = 50
+  case minus = 27
+  case equal = 24
+  case leftBracket = 33
+  case rightBracket = 30
+  case semicolon = 41
+  case quote = 39
+  case comma = 43
+  case period = 47
+  case slash = 44
+  case backslash = 42
+  case keypad0 = 82
+  case keypad1 = 83
+  case keypad2 = 84
+  case keypad3 = 85
+  case keypad4 = 86
+  case keypad5 = 87
+  case keypad6 = 88
+  case keypad7 = 89
+  case keypad8 = 91
+  case keypad9 = 92
+  case keypadDecimal = 65
+  case keypadMultiply = 67
+  case keypadPlus = 69
+  case keypadDivide = 75
+  case keypadMinus = 78
+  case keypadEquals = 81
+  case keypadClear = 71
+  case keypadEnter = 76
+  case space = 49
+  case `return` = 36
+  case tab = 48
+  case delete = 51
+  case forwardDelete = 117
+  case linefeed = 52
+  case escape = 53
+  case command = 55
+  case shift = 56
+  case capsLock = 57
+  case option = 58
+  case control = 59
+  case rightShift = 60
+  case rightOption = 61
+  case rightControl = 62
+  case function = 63
+  case f1 = 122
+  case f2 = 120
+  case f3 = 99
+  case f4 = 118
+  case f5 = 96
+  case f6 = 97
+  case f7 = 98
+  case f8 = 100
+  case f9 = 101
+  case f10 = 109
+  case f11 = 103
+  case f12 = 111
+  case f13 = 105
+  case f14 = 107
+  case f15 = 113
+  case f16 = 106
+  case f17 = 64
+  case f18 = 79
+  case f19 = 80
+  case f20 = 90
+  case volumeUp = 72
+  case volumeDown = 73
+  case mute = 74
+  case helpInsert = 114
+  case home = 115
+  case end = 119
+  case pageUp = 116
+  case pageDown = 121
+  case leftArrow = 123
+  case rightArrow = 124
+  case downArrow = 125
+  case upArrow = 126
+  case buttonA = 1001
+  case buttonB = 1002
+  case buttonX = 1003
+  case buttonY = 1004
+  case leftShoulder = 1005
+  case rightShoulder = 1006
+  case leftTrigger = 1007
+  case rightTrigger = 1008
+}
+
