@@ -25,15 +25,15 @@ public protocol Controller {
 // MARK: -
 
 public struct Axis {
-  var x: CGFloat
-  var y: CGFloat
+  public var x: CGFloat
+  public var y: CGFloat
 }
 
 // MARK: -
 
 public enum Player {
   
-  var keys: ControllerKeys {
+  public var keys: ControllerKeys {
     switch self {
     case .first:
       return  ControllerKeys(down: .downArrow, up: .upArrow, left: .leftArrow, right: .rightArrow,
@@ -51,23 +51,23 @@ public enum Player {
 }
 
 public struct ControllerKeys {
-  let down: Keys
-  let up: Keys
-  let left: Keys
-  let right: Keys
+  public let down: Keys
+  public let up: Keys
+  public let left: Keys
+  public let right: Keys
 
-  let a: Keys
-  let b: Keys
-  let x: Keys
-  let y: Keys
+  public let a: Keys
+  public let b: Keys
+  public let x: Keys
+  public let y: Keys
 
-  let leftShoulder: Keys
-  let rightShoulder: Keys
+  public let leftShoulder: Keys
+  public  let rightShoulder: Keys
 
-  let leftTrigger: Keys
-  let rightTrigger: Keys
+  public let leftTrigger: Keys
+  public  let rightTrigger: Keys
   
-  var all: [Keys] {
+  public var all: [Keys] {
     [down, up, left, right, a, b, x, y, leftShoulder, rightShoulder, leftTrigger, rightTrigger]
   }
 }

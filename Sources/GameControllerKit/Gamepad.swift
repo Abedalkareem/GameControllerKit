@@ -10,7 +10,7 @@ import GameController
 
 public class Gamepad: Controller {
   
-  typealias GamepadStateUpdated = (GamepadState) -> Void
+  public typealias GamepadStateUpdated = (GamepadState) -> Void
     
   // MARK: - Properties
   
@@ -18,7 +18,7 @@ public class Gamepad: Controller {
   public var pressedKeys = Set<Keys>()
   public var player: Player
 
-  var controller: GCController? {
+  public var controller: GCController? {
     GCController.controllers()
       .first(where: { player == .first ? $0.playerIndex == .index1 : $0.playerIndex == .index2 })
   }
@@ -117,7 +117,7 @@ public class Gamepad: Controller {
     checkControllers()
   }
   
-  func observeForGamepadStateUpdated(_ callback: @escaping GamepadStateUpdated) {
+  public func observeForGamepadStateUpdated(_ callback: @escaping GamepadStateUpdated) {
     self.gamepadStateUpdated = callback
     checkControllers()
   }
@@ -125,9 +125,9 @@ public class Gamepad: Controller {
 
 // MARK: -
 
-enum GamepadState {
+public enum GamepadState {
   
-  var message: String {
+  public var message: String {
     switch self {
     case .allGood:
       return ""
