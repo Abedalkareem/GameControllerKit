@@ -7,7 +7,7 @@
 #if os(macOS)
 import AppKit
 
-class Keyboard: Controller {
+public class Keyboard: Controller {
     
   // MARK: - Properties
   

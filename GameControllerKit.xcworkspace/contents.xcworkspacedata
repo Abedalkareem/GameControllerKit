@@ -11,8 +11,8 @@
       location = "group:Sources"
       name = "Sources">
       <Group
-         location = "group:MyLibrary"
-         name = "MyLibrary">
+         location = "group:GameControllerKit"
+         name = "GameControllerKit">
          <FileRef
             location = "group:Keys.swift">
          </FileRef>
@@ -31,10 +31,10 @@
       location = "group:Tests"
       name = "Tests">
       <Group
-         location = "group:MyLibraryTests"
+         location = "group:GameControllerKitTests"
          name = "MyLibraryTests">
          <FileRef
-            location = "group:MyLibraryTests.swift">
+            location = "group:GameControllerKitTests.swift">
          </FileRef>
       </Group>
    </Group>

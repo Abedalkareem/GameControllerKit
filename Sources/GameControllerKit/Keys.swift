@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Keys: UInt16 {
+public enum Keys: UInt16 {
   case zero = 29
   case one = 18
   case two = 19

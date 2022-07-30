@@ -10,7 +10,7 @@ import UIKit
 import Cocoa
 #endif
 
-protocol Controller {
+public protocol Controller {
   
   init(player: Player)
   
@@ -24,14 +24,14 @@ protocol Controller {
 
 // MARK: -
 
-struct Axis {
+public struct Axis {
   var x: CGFloat
   var y: CGFloat
 }
 
 // MARK: -
 
-enum Player {
+public enum Player {
   
   var keys: ControllerKeys {
     switch self {
@@ -50,7 +50,7 @@ enum Player {
   case second
 }
 
-struct ControllerKeys {
+public struct ControllerKeys {
   let down: Keys
   let up: Keys
   let left: Keys

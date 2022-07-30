@@ -8,17 +8,15 @@
 import Foundation
 import GameController
 
-typealias ControllerButtonValueChangedHandler = GCControllerButtonValueChangedHandler
-
-class Gamepad: Controller {
+public class Gamepad: Controller {
   
   typealias GamepadStateUpdated = (GamepadState) -> Void
     
   // MARK: - Properties
   
-  var arrowAxis = Axis(x: 0, y: 0)
-  var pressedKeys = Set<Keys>()
-  var player: Player
+  public var arrowAxis = Axis(x: 0, y: 0)
+  public var pressedKeys = Set<Keys>()
+  public var player: Player
 
   var controller: GCController? {
     GCController.controllers()
@@ -35,7 +33,7 @@ class Gamepad: Controller {
 
   // MARK: - init
   
-  required init(player: Player) {
+  public required init(player: Player) {
     self.player = player
     startWirelessControllerDiscovery()
     observeForControllers()
@@ -114,7 +112,7 @@ class Gamepad: Controller {
   
   // MARK: - Public methods
   
-  func observeForControllerCallback(_ callback: @escaping ControllerCallback) {
+  public func observeForControllerCallback(_ callback: @escaping ControllerCallback) {
     self.controllerCallback = callback
     checkControllers()
   }
