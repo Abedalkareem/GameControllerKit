@@ -34,7 +34,7 @@ public class Keyboard: Controller {
       .addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { [weak self] event -> NSEvent? in
         guard let self = self else { return event }
         
-        guard let key = Keys(rawValue: event.keyCode), self.player.keys.all.contains(key) else {
+        guard let key = Keys(rawValue: event.keyCode) else {
           return event
         }
         
