@@ -20,7 +20,7 @@ public class Gamepad: Controller {
 
   public var controller: GCController? {
     GCController.controllers()
-      .first(where: { player == .first ? $0.playerIndex == .index1 : $0.playerIndex == .index2 })
+      .first(where: { $0.playerIndex == GCControllerPlayerIndex(rawValue: player.index.rawValue) })
   }
   
   // MARK: - Private Properties
