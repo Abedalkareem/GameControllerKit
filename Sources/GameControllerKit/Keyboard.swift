@@ -11,9 +11,9 @@ public class Keyboard: Controller {
     
   // MARK: - Properties
   
-  var arrowAxis = Axis(x: 0, y: 0)
-  var pressedKeys = Set<Keys>()
-  var player: Player
+  public var arrowAxis = Axis(x: 0, y: 0)
+  public var pressedKeys = Set<Keys>()
+  public var player: Player
 
   // MARK: - Private Properties
   
@@ -22,7 +22,7 @@ public class Keyboard: Controller {
   
   // MARK: - init
   
-  required init(player: Player) {
+  public required init(player: Player) {
     self.player = player
     addLocalMonitorForEvents()
   }
@@ -84,7 +84,7 @@ public class Keyboard: Controller {
   
   // MARK: - Public Method
   
-  func observeForControllerCallback(_ callback: @escaping ControllerCallback) {
+  public func observeForControllerCallback(_ callback: @escaping ControllerCallback) {
     self.callback = callback
   }
   

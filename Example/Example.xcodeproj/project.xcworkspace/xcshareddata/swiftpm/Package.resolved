@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "gamecontrollerkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Abedalkareem/GameControllerKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "408ce866fcbb60757ce105cba5be6e9713891ef3"
+      }
+    }
+  ],
+  "version" : 2
+}
