@@ -103,7 +103,7 @@ public class Gamepad: Controller {
       if isPressed {
         self?.pressedKeys.insert(button)
       } else {
-        self?.pressedKeys.insert(button)
+        self?.pressedKeys.remove(button)
       }
       self?.controllerCallback?(self?.pressedKeys ?? [])
     }
