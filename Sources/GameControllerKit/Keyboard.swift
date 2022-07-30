@@ -38,11 +38,10 @@ public class Keyboard: Controller {
           return event
         }
         
-        let mappedKey = self.player.keys.all.first(where: { $0 == key }) ?? key
         if event.type == .keyDown {
-          self.pressedKeys.insert(mappedKey)
+          self.pressedKeys.insert(key)
         } else if event.type == .keyUp {
-          self.pressedKeys.remove(mappedKey)
+          self.pressedKeys.remove(key)
         }
         
         self.updateAxis()
