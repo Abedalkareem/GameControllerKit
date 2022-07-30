@@ -2,8 +2,42 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MyLibrary">
+      location = "group:Package.swift">
    </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <Group
+      location = "group:Sources"
+      name = "Sources">
+      <Group
+         location = "group:MyLibrary"
+         name = "MyLibrary">
+         <FileRef
+            location = "group:Keys.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Controller.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Gamepad.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Keyboard.swift">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
+      location = "group:Tests"
+      name = "Tests">
+      <Group
+         location = "group:MyLibraryTests"
+         name = "MyLibraryTests">
+         <FileRef
+            location = "group:MyLibraryTests.swift">
+         </FileRef>
+      </Group>
+   </Group>
    <FileRef
       location = "group:Example/Example.xcodeproj">
    </FileRef>

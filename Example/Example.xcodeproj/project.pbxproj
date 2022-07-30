@@ -16,13 +16,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C6B911DC2894EBB400C8241E /* GameControllerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = GameControllerKit; path = ..; sourceTree = "<group>"; };
 		C6F13F28288A24D000A8C68D /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		C6F13F29288A24D000A8C68D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C6F13F2A288A24D300A8C68D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6F13F2F288A24D300A8C68D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F13F35288A24D300A8C68D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F13F37288A24D300A8C68D /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		C6F13F47288A265000A8C68D /* MyLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MyLibrary; path = ../MyLibrary; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,10 +43,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C6B911DB2894EBB400C8241E /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				C6B911DC2894EBB400C8241E /* GameControllerKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		C6F13F22288A24D000A8C68D = {
 			isa = PBXGroup;
 			children = (
-				C6F13F46288A265000A8C68D /* Packages */,
+				C6B911DB2894EBB400C8241E /* Packages */,
 				C6F13F27288A24D000A8C68D /* Shared */,
 				C6F13F36288A24D300A8C68D /* macOS */,
 				C6F13F30288A24D300A8C68D /* Products */,
@@ -78,14 +86,6 @@
 				C6F13F37288A24D300A8C68D /* macOS.entitlements */,
 			);
 			path = macOS;
-			sourceTree = "<group>";
-		};
-		C6F13F46288A265000A8C68D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				C6F13F47288A265000A8C68D /* MyLibrary */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
