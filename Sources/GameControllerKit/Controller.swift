@@ -74,4 +74,35 @@ public struct ControllerKeys {
   public var all: [Keys] {
     [down, up, left, right, a, b, x, y, leftShoulder, rightShoulder, leftTrigger, rightTrigger]
   }
+  
+  public func getMappedKeyFor(key: Keys) -> Keys? {
+    switch key {
+    case self.down:
+      return .downArrow
+    case self.up:
+      return .upArrow
+    case self.left:
+      return .leftArrow
+    case self.right:
+      return .rightArrow
+    case self.a:
+      return .buttonA
+    case self.b:
+      return .buttonB
+    case self.x:
+      return .buttonX
+    case self.y:
+      return .buttonY
+    case self.leftShoulder:
+      return .leftShoulder
+    case self.rightShoulder:
+      return .rightShoulder
+    case self.leftTrigger:
+      return .leftTrigger
+    case self.rightTrigger:
+      return .rightTrigger
+    default:
+      return nil
+    }
+  }
 }
