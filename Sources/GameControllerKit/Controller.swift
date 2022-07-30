@@ -33,16 +33,16 @@ public struct Axis {
 
 public struct Player {
   
-  static let defaultFirst = Player(keys: ControllerKeys(down: .downArrow, up: .upArrow, left: .leftArrow, right: .rightArrow,
-                                                        a: .l, b: .k, x: .j, y: .h,
-                                                        leftShoulder: .u, rightShoulder: .p, leftTrigger: .i, rightTrigger: .o),
-                                   index: .index1)
-  static let defaultSecond = Player(keys:  ControllerKeys(down: .s, up: .w, left: .a, right: .d,
-                                                          a: .z, b: .x, x: .c, y: .v,
-                                                          leftShoulder: .r, rightShoulder: .t, leftTrigger: .f, rightTrigger: .g),
-                                    index: .index2)
+  public static var defaultFirst = Player(keys: ControllerKeys(down: .downArrow, up: .upArrow, left: .leftArrow, right: .rightArrow,
+                                                               a: .l, b: .k, x: .j, y: .h,
+                                                               leftShoulder: .u, rightShoulder: .p, leftTrigger: .i, rightTrigger: .o),
+                                          index: .index1)
+  public static var defaultSecond = Player(keys:  ControllerKeys(down: .s, up: .w, left: .a, right: .d,
+                                                                 a: .z, b: .x, x: .c, y: .v,
+                                                                 leftShoulder: .r, rightShoulder: .t, leftTrigger: .f, rightTrigger: .g),
+                                           index: .index2)
   
-  public let keys: ControllerKeys
+  public var keys: ControllerKeys
   public let index: PlayerIndex
   
 }
@@ -55,21 +55,21 @@ public enum PlayerIndex: Int {
 }
 
 public struct ControllerKeys {
-  public let down: Keys
-  public let up: Keys
-  public let left: Keys
-  public let right: Keys
+  public var down: Keys
+  public var up: Keys
+  public var left: Keys
+  public var right: Keys
   
-  public let a: Keys
-  public let b: Keys
-  public let x: Keys
-  public let y: Keys
+  public var a: Keys
+  public var b: Keys
+  public var x: Keys
+  public var y: Keys
   
-  public let leftShoulder: Keys
-  public  let rightShoulder: Keys
+  public var leftShoulder: Keys
+  public  var rightShoulder: Keys
   
-  public let leftTrigger: Keys
-  public  let rightTrigger: Keys
+  public var leftTrigger: Keys
+  public  var rightTrigger: Keys
   
   public var all: [Keys] {
     [down, up, left, right, a, b, x, y, leftShoulder, rightShoulder, leftTrigger, rightTrigger]
