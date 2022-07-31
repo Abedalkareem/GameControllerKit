@@ -5,6 +5,7 @@
 //  Created by abedalkareem omreyh on 29/07/2022.
 //
 
+#if !os(watchOS)
 import Foundation
 import GameController
 
@@ -142,3 +143,4 @@ public enum GamepadState {
   case justOneControllerConnected
   case allGood
 }
+#endif
