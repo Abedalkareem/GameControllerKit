@@ -43,8 +43,12 @@ public struct Player {
                                            index: .index2)
   
   public var keyboardToControllerKeysMap: KeyboardToControllerKeysMap
-  public let index: PlayerIndex
+  public var index: PlayerIndex
   
+  public init(keyboardToControllerKeysMap: KeyboardToControllerKeysMap, index: PlayerIndex) {
+    self.keyboardToControllerKeysMap = keyboardToControllerKeysMap
+    self.index = index
+  }
 }
 
 public enum PlayerIndex: Int {
