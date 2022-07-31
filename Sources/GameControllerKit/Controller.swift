@@ -33,16 +33,16 @@ public struct Axis {
 
 public struct Player {
   
-  public static var defaultFirst = Player(keys: ControllerKeys(down: .downArrow, up: .upArrow, left: .leftArrow, right: .rightArrow,
-                                                               a: .l, b: .k, x: .j, y: .h,
-                                                               leftShoulder: .u, rightShoulder: .p, leftTrigger: .i, rightTrigger: .o),
+  public static var defaultFirst = Player(keyboardToControllerKeysMap: KeyboardToControllerKeysMap(down: .downArrow, up: .upArrow, left: .leftArrow, right: .rightArrow,
+                                                                                                   a: .l, b: .k, x: .j, y: .h,
+                                                                                                   leftShoulder: .u, rightShoulder: .p, leftTrigger: .i, rightTrigger: .o),
                                           index: .index1)
-  public static var defaultSecond = Player(keys:  ControllerKeys(down: .s, up: .w, left: .a, right: .d,
-                                                                 a: .z, b: .x, x: .c, y: .v,
-                                                                 leftShoulder: .r, rightShoulder: .t, leftTrigger: .f, rightTrigger: .g),
+  public static var defaultSecond = Player(keyboardToControllerKeysMap: KeyboardToControllerKeysMap(down: .s, up: .w, left: .a, right: .d,
+                                                                                                    a: .z, b: .x, x: .c, y: .v,
+                                                                                                    leftShoulder: .r, rightShoulder: .t, leftTrigger: .f, rightTrigger: .g),
                                            index: .index2)
   
-  public var keys: ControllerKeys
+  public var keyboardToControllerKeysMap: KeyboardToControllerKeysMap
   public let index: PlayerIndex
   
 }
@@ -54,7 +54,7 @@ public enum PlayerIndex: Int {
   case index4
 }
 
-public struct ControllerKeys {
+public struct KeyboardToControllerKeysMap {
   public var down: Keys
   public var up: Keys
   public var left: Keys

@@ -34,11 +34,11 @@ public class Keyboard: Controller {
       .addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { [weak self] event -> NSEvent? in
         guard let self = self else { return event }
         
-        guard let key = Keys(rawValue: event.keyCode), self.player.keys.all.contains(key) else {
+        guard let key = Keys(rawValue: event.keyCode), self.player.keyboardToControllerKeysMap.all.contains(key) else {
           return event
         }
         
-        let mappedKey = self.player.keys.getMappedKeyFor(key: key) ?? key
+        let mappedKey = self.player.keyboardToControllerKeysMap.getMappedKeyFor(key: key) ?? key
         if event.type == .keyDown {
           self.pressedKeys.insert(mappedKey)
         } else if event.type == .keyUp {
@@ -54,22 +54,23 @@ public class Keyboard: Controller {
   }
   
   private func updateAxis() {
+    let controllerKeys = self.player.keyboardToControllerKeysMap
     switch pressedKeys {
-    case let keys where keys.isSuperset(of: [player.keys.up, player.keys.left]):
+    case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.left]):
       arrowAxis = Axis(x: -1, y: 1)
-    case let keys where keys.isSuperset(of: [player.keys.up, player.keys.right]):
+    case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.right]):
       arrowAxis = Axis(x: 1, y: 1)
-    case let keys where keys.isSuperset(of: [player.keys.down, player.keys.left]):
+    case let keys where keys.isSuperset(of: [controllerKeys.down, controllerKeys.left]):
       arrowAxis = Axis(x: -1, y: -1)
-    case let keys where keys.isSuperset(of: [player.keys.down, player.keys.right]):
+    case let keys where keys.isSuperset(of: [controllerKeys.down, controllerKeys.right]):
       arrowAxis = Axis(x: 1, y: -1)
-    case let keys where keys.contains(player.keys.up):
+    case let keys where keys.contains(controllerKeys.up):
       arrowAxis = Axis(x: 0, y: 1)
-    case let keys where keys.contains(player.keys.down):
+    case let keys where keys.contains(controllerKeys.down):
       arrowAxis = Axis(x: 0, y: -1)
-    case let keys where keys.contains(player.keys.left):
+    case let keys where keys.contains(controllerKeys.left):
       arrowAxis = Axis(x: -1, y: 0)
-    case let keys where keys.contains(player.keys.right):
+    case let keys where keys.contains(controllerKeys.right):
       arrowAxis = Axis(x: 1, y: 0)
     default:
       arrowAxis = Axis(x: 0, y: 0)

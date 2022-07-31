@@ -55,28 +55,23 @@ public class Gamepad: Controller {
   }
   
   private func checkControllers() {
-    var controllers: [GCController] = GCController.controllers().reversed()
+    let controllers: [GCController] = GCController.controllers().reversed()
     guard controllers.count >= 1 else {
       gamepadStateUpdated?(.noControllersConnected)
       return
     }
     
     controllers.first?.playerIndex = .index1
-    observeForKeys()
     
     guard controllers.count >= 2 else {
+      observeForKeys()
       gamepadStateUpdated?(.justOneControllerConnected)
       return
     }
     
-    let extendedGamepads = controllers.filter({ $0.extendedGamepad != nil })
-    if extendedGamepads.count >= 2 {
-      controllers = extendedGamepads
-    }
-    
     controllers.enumerated().forEach({ $1.playerIndex = GCControllerPlayerIndex(rawValue: $0)! })
-    gamepadStateUpdated?(.allGood)
     observeForKeys()
+    gamepadStateUpdated?(.allGood)
   }
   
   private func observeForKeys() {
