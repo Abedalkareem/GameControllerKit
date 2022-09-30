@@ -18,7 +18,8 @@ public protocol Controller {
   
   var arrowAxis: Axis { get set }
   var pressedKeys: Set<Keys> { get set }
-  
+  var index: PlayerIndex { get }
+
   func observeForControllerCallback(_ callback: @escaping ControllerCallback)
 }
 

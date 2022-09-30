@@ -14,6 +14,9 @@ public class Keyboard: Controller {
   public var arrowAxis = Axis(x: 0, y: 0)
   public var pressedKeys = Set<Keys>()
   public var player: Player
+  public var index: PlayerIndex {
+    player.index
+  }
 
   // MARK: - Private Properties
   
