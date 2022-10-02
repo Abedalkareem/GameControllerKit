@@ -60,6 +60,7 @@ public enum PlayerIndex: Int {
 }
 
 public struct KeyboardToControllerKeysMap {
+
   public var down: Keys
   public var up: Keys
   public var left: Keys
@@ -75,6 +76,21 @@ public struct KeyboardToControllerKeysMap {
   
   public var leftTrigger: Keys
   public  var rightTrigger: Keys
+
+  public init(down: Keys, up: Keys, left: Keys, right: Keys, a: Keys, b: Keys, x: Keys, y: Keys, leftShoulder: Keys, rightShoulder: Keys, leftTrigger: Keys, rightTrigger: Keys) {
+    self.down = down
+    self.up = up
+    self.left = left
+    self.right = right
+    self.a = a
+    self.b = b
+    self.x = x
+    self.y = y
+    self.leftShoulder = leftShoulder
+    self.rightShoulder = rightShoulder
+    self.leftTrigger = leftTrigger
+    self.rightTrigger = rightTrigger
+  }
   
   public var all: [Keys] {
     [down, up, left, right, a, b, x, y, leftShoulder, rightShoulder, leftTrigger, rightTrigger]
