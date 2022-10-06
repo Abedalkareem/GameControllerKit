@@ -68,7 +68,7 @@ public class Gamepad: Controller {
     
     guard controllers.count >= 2 else {
       observeForKeys()
-      gamepadStateUpdated?(.justOneControllerConnected)
+      gamepadStateUpdated?(.oneControllerConnected)
       return
     }
     
@@ -132,13 +132,13 @@ public enum GamepadState {
       return ""
     case .noControllersConnected:
       return "No Controllers Connected"
-    case .justOneControllerConnected:
+    case .oneControllerConnected:
       return "One controller connected, Please connect another one"
     }
   }
   
   case noControllersConnected
-  case justOneControllerConnected
+  case oneControllerConnected
   case allGood
 }
 #endif
