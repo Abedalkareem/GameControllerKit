@@ -12,7 +12,7 @@ import GameController
 public class Gamepad: Controller {
   
   public typealias GamepadStateUpdated = (GamepadState) -> Void
-    
+
   // MARK: - Properties
   
   public var arrowAxis = Axis(x: 0, y: 0)
@@ -63,7 +63,7 @@ public class Gamepad: Controller {
       gamepadStateUpdated?(.noControllersConnected)
       return
     }
-    
+
     controllers.first?.playerIndex = .index1
     
     guard controllers.count >= 2 else {
@@ -71,8 +71,11 @@ public class Gamepad: Controller {
       gamepadStateUpdated?(.oneControllerConnected)
       return
     }
-    
-    controllers.enumerated().forEach({ $1.playerIndex = GCControllerPlayerIndex(rawValue: $0)! })
+
+    var allIndexes: [GCControllerPlayerIndex] = [.index1, .index2, .index3, .index4]
+    controllers.forEach({ controller in allIndexes.removeAll(where: { index in index.rawValue == controller.playerIndex.rawValue }) })
+    let controllersWithoutIndex = controllers.filter({ $0.playerIndex == .indexUnset })
+    controllersWithoutIndex.forEach({ $0.playerIndex = allIndexes.removeFirst() })
     observeForKeys()
     gamepadStateUpdated?(.allGood)
   }
