@@ -57,23 +57,22 @@ public class Keyboard: Controller {
   }
   
   private func updateAxis() {
-    let controllerKeys = self.player.keyboardToControllerKeysMap
-    switch Set(pressedKeys.map({ player.keyboardToControllerKeysMap.mappedKeyToOriginal(key: $0) })) {
-    case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.left]):
+    switch pressedKeys {
+    case let keys where keys.isSuperset(of: [Keys.upArrow, Keys.leftArrow]):
       arrowAxis = Axis(x: -1, y: 1)
-    case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.right]):
+    case let keys where keys.isSuperset(of: [Keys.upArrow, Keys.rightArrow]):
       arrowAxis = Axis(x: 1, y: 1)
-    case let keys where keys.isSuperset(of: [controllerKeys.down, controllerKeys.left]):
+    case let keys where keys.isSuperset(of: [Keys.downArrow, Keys.leftArrow]):
       arrowAxis = Axis(x: -1, y: -1)
-    case let keys where keys.isSuperset(of: [controllerKeys.down, controllerKeys.right]):
+    case let keys where keys.isSuperset(of: [Keys.downArrow, Keys.rightArrow]):
       arrowAxis = Axis(x: 1, y: -1)
-    case let keys where keys.contains(controllerKeys.up):
+    case let keys where keys.contains(Keys.upArrow):
       arrowAxis = Axis(x: 0, y: 1)
-    case let keys where keys.contains(controllerKeys.down):
+    case let keys where keys.contains(Keys.downArrow):
       arrowAxis = Axis(x: 0, y: -1)
-    case let keys where keys.contains(controllerKeys.left):
+    case let keys where keys.contains(Keys.leftArrow):
       arrowAxis = Axis(x: -1, y: 0)
-    case let keys where keys.contains(controllerKeys.right):
+    case let keys where keys.contains(Keys.rightArrow):
       arrowAxis = Axis(x: 1, y: 0)
     default:
       arrowAxis = Axis(x: 0, y: 0)
