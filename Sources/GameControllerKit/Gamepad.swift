@@ -64,9 +64,8 @@ public class Gamepad: Controller {
       return
     }
 
-    controllers.first?.playerIndex = .index1
-    
     guard controllers.count >= 2 else {
+      controllers.first?.playerIndex = .index1
       observeForKeys()
       gamepadStateUpdated?(.oneControllerConnected)
       return
