@@ -35,7 +35,7 @@ public class Keyboard: Controller {
   private func addLocalMonitorForEvents() {
     eventHandler = NSEvent
       .addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { [weak self] event -> NSEvent? in
-        guard let self = self else { return event }
+        guard let self else { return event }
         
         guard let key = Keys(rawValue: event.keyCode), self.player.keyboardToControllerKeysMap.all.contains(key) else {
           return event
@@ -58,7 +58,7 @@ public class Keyboard: Controller {
   
   private func updateAxis() {
     let controllerKeys = self.player.keyboardToControllerKeysMap
-    switch pressedKeys {
+    switch Set(pressedKeys.map({ player.keyboardToControllerKeysMap.mappedKeyToOriginal(key: $0) })) {
     case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.left]):
       arrowAxis = Axis(x: -1, y: 1)
     case let keys where keys.isSuperset(of: [controllerKeys.up, controllerKeys.right]):

@@ -126,4 +126,35 @@ public struct KeyboardToControllerKeysMap {
       return nil
     }
   }
+
+  public func mappedKeyToOriginal(key: Keys) -> Keys? {
+    switch key {
+    case Keys.downArrow:
+      return down
+    case Keys.upArrow:
+      return up
+    case Keys.leftArrow:
+      return left
+    case Keys.rightArrow:
+      return right
+    case Keys.buttonA:
+      return a
+    case Keys.buttonB:
+      return b
+    case Keys.buttonX:
+      return x
+    case Keys.buttonY:
+      return y
+    case Keys.leftShoulder:
+      return leftShoulder
+    case Keys.rightShoulder:
+      return rightShoulder
+    case Keys.leftTrigger:
+      return leftTrigger
+    case Keys.rightTrigger:
+      return rightTrigger
+    default:
+      return nil
+    }
+  }
 }
