@@ -58,7 +58,7 @@ public class Gamepad: Controller {
   }
   
   private func checkControllers() {
-    let controllers: [GCController] = GCController.controllers().reversed()
+    var controllers: [GCController] = GCController.controllers().reversed()
     guard controllers.count >= 1 else {
       gamepadStateUpdated?(.noControllersConnected)
       return
@@ -72,6 +72,9 @@ public class Gamepad: Controller {
     }
 
     var allIndexes: [GCControllerPlayerIndex] = [.index1, .index2, .index3, .index4]
+    if controllers.count > 4 {
+      let controllers = controllers.filter({ $0.extendedGamepad != nil })
+    }
     controllers.forEach({ controller in allIndexes.removeAll(where: { index in index.rawValue == controller.playerIndex.rawValue }) })
     let controllersWithoutIndex = controllers.filter({ $0.playerIndex == .indexUnset })
     controllersWithoutIndex.forEach({ $0.playerIndex = allIndexes.removeFirst() })
