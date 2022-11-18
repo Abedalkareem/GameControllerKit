@@ -39,8 +39,8 @@ public class Gamepad: Controller {
   
   public required init(player: Player) {
     self.player = player
-    startWirelessControllerDiscovery()
     observeForControllers()
+    startWirelessControllerDiscovery()
   }
   
   private func startWirelessControllerDiscovery() {
