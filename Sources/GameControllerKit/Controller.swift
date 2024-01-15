@@ -4,7 +4,7 @@
 //  Created by abedalkareem omreyh on 18/07/2022.
 //
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
 import UIKit
 #else
 import Cocoa
