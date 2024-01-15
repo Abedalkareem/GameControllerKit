@@ -4,7 +4,7 @@
 //  Created by abedalkareem omreyh on 18/07/2022.
 //
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
 import UIKit
 #else
 import Cocoa
@@ -15,12 +15,14 @@ public protocol Controller {
   init(player: Player)
   
   typealias ControllerCallback = (Set<Keys>) -> Void
-  
+  typealias AxisCallback = (Axis) -> Void
+
   var arrowAxis: Axis { get set }
   var pressedKeys: Set<Keys> { get set }
   var index: PlayerIndex { get }
 
   func observeForControllerCallback(_ callback: @escaping ControllerCallback)
+  func observeForControllerAxisCallback(_ callback: @escaping AxisCallback)
 }
 
 // MARK: -

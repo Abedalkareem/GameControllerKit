@@ -22,7 +22,8 @@ public class Keyboard: Controller {
   
   private var eventHandler: Any?
   private var callback: ControllerCallback?
-  
+  private var axisCallback: AxisCallback?
+
   // MARK: - init
   
   public required init(player: Player) {
@@ -77,6 +78,7 @@ public class Keyboard: Controller {
     default:
       arrowAxis = Axis(x: 0, y: 0)
     }
+    self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
   }
   
   private func removeMonitorForEvents() {
@@ -90,6 +92,10 @@ public class Keyboard: Controller {
   
   public func observeForControllerCallback(_ callback: @escaping ControllerCallback) {
     self.callback = callback
+  }
+  
+  public func observeForControllerAxisCallback(_ callback: @escaping AxisCallback) {
+    self.axisCallback = callback
   }
   
   // MARK: - deinit

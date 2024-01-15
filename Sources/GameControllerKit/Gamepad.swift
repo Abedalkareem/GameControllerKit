@@ -34,6 +34,7 @@ public class Gamepad: Controller {
   }
   private var controllerCallback: ControllerCallback?
   private var gamepadStateUpdated: GamepadStateUpdated?
+  private var axisCallback: AxisCallback?
 
   // MARK: - init
   
@@ -89,6 +90,7 @@ public class Gamepad: Controller {
     
     let dpadValueChangedHandler: GCControllerDirectionPadValueChangedHandler = { [weak self] value, x, y in
       self?.arrowAxis = Axis(x: CGFloat(x), y: CGFloat(y))
+      self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
     }
     controller.microGamepad?.dpad.valueChangedHandler = dpadValueChangedHandler
     controller.extendedGamepad?.leftThumbstick.valueChangedHandler = dpadValueChangedHandler
@@ -124,6 +126,10 @@ public class Gamepad: Controller {
   public func observeForGamepadStateUpdated(_ callback: @escaping GamepadStateUpdated) {
     self.gamepadStateUpdated = callback
     checkControllers()
+  }
+  
+  public func observeForControllerAxisCallback(_ callback: @escaping AxisCallback) {
+    self.axisCallback = callback
   }
 }
 
