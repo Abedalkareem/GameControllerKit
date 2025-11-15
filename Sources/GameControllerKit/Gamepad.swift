@@ -95,22 +95,22 @@ public class Gamepad: Controller {
       self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
       if let arrowAxis = self?.arrowAxis {
         // Remove all directional keys first
-        self?.pressedKeys.remove(.left)
-        self?.pressedKeys.remove(.right)
-        self?.pressedKeys.remove(.up)
-        self?.pressedKeys.remove(.down)
+        self?.pressedKeys.remove(.leftArrow)
+        self?.pressedKeys.remove(.rightArrow)
+        self?.pressedKeys.remove(.upArrow)
+        self?.pressedKeys.remove(.downArrow)
         
         // Add pressed keys based on axis values
         if arrowAxis.x < -0.5 {
-          self?.pressedKeys.insert(.left)
+          self?.pressedKeys.insert(.leftArrow)
         } else if arrowAxis.x > 0.5 {
-          self?.pressedKeys.insert(.right)
+          self?.pressedKeys.insert(.rightArrow)
         }
         
         if arrowAxis.y < -0.5 {
-          self?.pressedKeys.insert(.down)
+          self?.pressedKeys.insert(.downArrow)
         } else if arrowAxis.y > 0.5 {
-          self?.pressedKeys.insert(.up)
+          self?.pressedKeys.insert(.upArrow)
         }
         
         self?.controllerCallback?(self?.pressedKeys ?? [])
