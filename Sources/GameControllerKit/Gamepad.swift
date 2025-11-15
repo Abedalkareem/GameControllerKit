@@ -8,7 +8,9 @@
 #if !os(watchOS)
 import Foundation
 import GameController
+import Combine
 
+@Observable
 public class Gamepad: Controller {
   
   public typealias GamepadStateUpdated = (GamepadState) -> Void
@@ -74,7 +76,7 @@ public class Gamepad: Controller {
 
     var allIndexes: [GCControllerPlayerIndex] = [.index1, .index2, .index3, .index4]
     if controllers.count > 4 {
-      let controllers = controllers.filter({ $0.extendedGamepad != nil })
+      controllers = controllers.filter({ $0.extendedGamepad != nil })
     }
     controllers.forEach({ controller in allIndexes.removeAll(where: { index in index.rawValue == controller.playerIndex.rawValue }) })
     let controllersWithoutIndex = controllers.filter({ $0.playerIndex == .indexUnset })
@@ -91,6 +93,28 @@ public class Gamepad: Controller {
     let dpadValueChangedHandler: GCControllerDirectionPadValueChangedHandler = { [weak self] value, x, y in
       self?.arrowAxis = Axis(x: CGFloat(x), y: CGFloat(y))
       self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
+      if let arrowAxis = self?.arrowAxis {
+        // Remove all directional keys first
+        self?.pressedKeys.remove(.left)
+        self?.pressedKeys.remove(.right)
+        self?.pressedKeys.remove(.up)
+        self?.pressedKeys.remove(.down)
+        
+        // Add pressed keys based on axis values
+        if arrowAxis.x < -0.5 {
+          self?.pressedKeys.insert(.left)
+        } else if arrowAxis.x > 0.5 {
+          self?.pressedKeys.insert(.right)
+        }
+        
+        if arrowAxis.y < -0.5 {
+          self?.pressedKeys.insert(.down)
+        } else if arrowAxis.y > 0.5 {
+          self?.pressedKeys.insert(.up)
+        }
+        
+        self?.controllerCallback?(self?.pressedKeys ?? [])
+      }
     }
     controller.microGamepad?.dpad.valueChangedHandler = dpadValueChangedHandler
     controller.extendedGamepad?.leftThumbstick.valueChangedHandler = dpadValueChangedHandler
