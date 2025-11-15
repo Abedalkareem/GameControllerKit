@@ -10,7 +10,6 @@ import Foundation
 import GameController
 import Combine
 
-@Observable
 public class Gamepad: Controller {
   
   public typealias GamepadStateUpdated = (GamepadState) -> Void
