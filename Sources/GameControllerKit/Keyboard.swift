@@ -78,7 +78,7 @@ public class Keyboard: Controller {
     default:
       arrowAxis = Axis(x: 0, y: 0)
     }
-    self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
+    axisCallback?(arrowAxis)
   }
   
   private func removeMonitorForEvents() {
