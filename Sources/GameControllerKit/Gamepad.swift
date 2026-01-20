@@ -22,6 +22,24 @@ public class Gamepad: Controller {
   private static var controllerToPlayerMap = [ObjectIdentifier: PlayerIndex]()
   private static var gamepadInstances = [WeakGamepad]()
 
+  /// Publisher for controller status changes - use this to show UI notifications
+  public static let controllerStatusPublisher = PassthroughSubject<ControllerStatus, Never>()
+
+  /// Returns current controller status
+  public static var currentControllerStatus: ControllerStatus {
+    let controllers = GCController.controllers()
+    var assignedPlayers: [PlayerIndex] = []
+    for (id, playerIndex) in controllerToPlayerMap {
+      if controllers.contains(where: { ObjectIdentifier($0) == id }) {
+        assignedPlayers.append(playerIndex)
+      }
+    }
+    return ControllerStatus(
+      connectedCount: controllers.count,
+      assignedPlayers: assignedPlayers.sorted(by: { $0.rawValue < $1.rawValue })
+    )
+  }
+
   // MARK: - Properties
 
   public var arrowAxis = Axis(x: 0, y: 0)
@@ -59,6 +77,9 @@ public class Gamepad: Controller {
   }
 
   private func startWirelessControllerDiscovery() {
+    #if os(visionOS)
+    GCController.shouldMonitorBackgroundEvents = true
+    #endif
     GCController.startWirelessControllerDiscovery()
   }
 
@@ -126,6 +147,9 @@ public class Gamepad: Controller {
     for weakGamepad in gamepadInstances {
       weakGamepad.gamepad?.onControllersChanged(count: controllerCount)
     }
+
+    // Publish controller status for UI updates
+    controllerStatusPublisher.send(currentControllerStatus)
   }
 
   private func onControllersChanged(count: Int) {
@@ -181,6 +205,57 @@ public class Gamepad: Controller {
 
     controller.extendedGamepad?.buttonB.valueChangedHandler = getValueChangedHandler(for: .buttonB)
     controller.extendedGamepad?.buttonY.valueChangedHandler = getValueChangedHandler(for: .buttonY)
+    controller.extendedGamepad?.leftShoulder.valueChangedHandler = getValueChangedHandler(for: .leftShoulder)
+    controller.extendedGamepad?.rightShoulder.valueChangedHandler = getValueChangedHandler(for: .rightShoulder)
+    controller.extendedGamepad?.leftTrigger.valueChangedHandler = getValueChangedHandler(for: .leftTrigger)
+    controller.extendedGamepad?.rightTrigger.valueChangedHandler = getValueChangedHandler(for: .rightTrigger)
+
+    // Fallback to physicalInputProfile for spatial controllers and other non-standard controllers
+    if controller.extendedGamepad == nil && controller.microGamepad == nil {
+      observePhysicalInputProfile(controller)
+    }
+  }
+
+  private func observePhysicalInputProfile(_ controller: GCController) {
+    let profile = controller.physicalInputProfile
+
+    if let thumbstick = profile.dpads[GCInputLeftThumbstick] ?? profile.dpads[GCInputDirectionPad] {
+      thumbstick.valueChangedHandler = { [weak self] _, x, y in
+        self?.arrowAxis = Axis(x: CGFloat(x), y: CGFloat(y))
+        self?.axisCallback?(self?.arrowAxis ?? .init(x: 0, y: 0))
+
+        self?.pressedKeys.remove(.leftArrow)
+        self?.pressedKeys.remove(.rightArrow)
+        self?.pressedKeys.remove(.upArrow)
+        self?.pressedKeys.remove(.downArrow)
+
+        if x < -0.5 { self?.pressedKeys.insert(.leftArrow) }
+        else if x > 0.5 { self?.pressedKeys.insert(.rightArrow) }
+        if y < -0.5 { self?.pressedKeys.insert(.downArrow) }
+        else if y > 0.5 { self?.pressedKeys.insert(.upArrow) }
+
+        self?.controllerCallback?(self?.pressedKeys ?? [])
+      }
+    }
+
+    let buttonMap: [(String, Keys)] = [
+      (GCInputButtonA, .buttonA),
+      (GCInputButtonB, .buttonB),
+      (GCInputButtonX, .buttonX),
+      (GCInputButtonY, .buttonY),
+    ]
+    for (inputName, key) in buttonMap {
+      if let button = profile.buttons[inputName] {
+        button.valueChangedHandler = { [weak self] _, value, isPressed in
+          if isPressed {
+            self?.pressedKeys.insert(key)
+          } else {
+            self?.pressedKeys.remove(key)
+          }
+          self?.controllerCallback?(self?.pressedKeys ?? [])
+        }
+      }
+    }
   }
 
   private func getValueChangedHandler(for button: Keys) -> GCControllerButtonValueChangedHandler {
@@ -217,21 +292,19 @@ public class Gamepad: Controller {
 // MARK: -
 
 public enum GamepadState {
-
-  public var message: String {
-    switch self {
-    case .allGood:
-      return ""
-    case .noControllersConnected:
-      return "No Controllers Connected"
-    case .oneControllerConnected:
-      return "One controller connected, Please connect another one"
-    }
-  }
-
   case noControllersConnected
   case oneControllerConnected
   case allGood
+}
+
+// MARK: - ControllerStatus
+
+/// Status information about connected controllers
+public struct ControllerStatus {
+  /// Number of controllers currently connected
+  public let connectedCount: Int
+  /// Which player indices have controllers assigned
+  public let assignedPlayers: [PlayerIndex]
 }
 
 // MARK: - WeakGamepad
